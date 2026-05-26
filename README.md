@@ -25,6 +25,12 @@ cd alias-manager
 go build -o am .
 ```
 
+### Uninstall
+```bash
+curl -fsSL https://raw.githubusercontent.com/Edwar-Sanz/alias-manager/main/uninstall.sh | bash
+```
+Removes the binary and shell integration. You'll be asked before your aliases at `~/.config/am/` are deleted.
+
 
 ## Usage
 

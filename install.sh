@@ -2,7 +2,7 @@
 
 set -e
 
-BINARY_URL="https://github.com/Edwar-Sanz/alias-manager/releases/download/v1.0.0/am-linux-amd64"
+BINARY_URL="https://github.com/Edwar-Sanz/alias-manager/releases/latest/download/am-linux-amd64"
 INSTALL_DIR="$HOME/.local/bin"
 AMF_SOURCE_LINE='[ -f ~/.config/am/.amf ] && source ~/.config/am/.amf'
 WRAPPER='
