@@ -102,7 +102,7 @@ func TestWriteAlias_AppendToEmptyFile(t *testing.T) {
 	}
 
 	content := readAll(t, path)
-	want := `alias ll="ls -la"#category:fs#description:list` + "\n"
+	want := `alias ll="ls -la" #category:fs#description:list` + "\n"
 	if content != want {
 		t.Errorf("content = %q, want %q", content, want)
 	}

@@ -52,8 +52,8 @@ func TestParseLine_Valid(t *testing.T) {
 			want: types.AliasEntry{Name: "g", Command: "git", Category: "vcs", Desc: "desc"},
 		},
 		{
-			name: "space before category marker (as produced by BuildLine)",
-			in:   `alias ll="ls -la" #category:git#description:list`,
+			name: "no space before category marker (legacy format — still parseable)",
+			in:   `alias ll="ls -la"#category:git#description:list`,
 			want: types.AliasEntry{Name: "ll", Command: "ls -la", Category: "git", Desc: "list"},
 		},
 	}
@@ -100,19 +100,19 @@ func TestBuildLine(t *testing.T) {
 		want  string
 	}{
 		{
-			name:  "double quoted by default",
+			name:  "double quoted by default — space before #category is REQUIRED (shell comment boundary)",
 			entry: types.AliasEntry{Name: "ll", Command: "ls -la", Category: "git", Desc: "list files"},
-			want:  `alias ll="ls -la"#category:git#description:list files`,
+			want:  `alias ll="ls -la" #category:git#description:list files`,
 		},
 		{
 			name:  "single quotes when command contains double quote",
 			entry: types.AliasEntry{Name: "g", Command: `echo "hi"`, Category: "misc", Desc: "test"},
-			want:  `alias g='echo "hi"'#category:misc#description:test`,
+			want:  `alias g='echo "hi"' #category:misc#description:test`,
 		},
 		{
 			name:  "empty command",
 			entry: types.AliasEntry{Name: "x", Command: "", Category: "c", Desc: "d"},
-			want:  `alias x=""#category:c#description:d`,
+			want:  `alias x="" #category:c#description:d`,
 		},
 	}
 	for _, tc := range tests {
