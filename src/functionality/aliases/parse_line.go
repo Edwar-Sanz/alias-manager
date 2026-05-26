@@ -30,12 +30,22 @@ func ParseLine(line string) (entry types.AliasEntry, ok bool) {
 	}
 	desc := meta[descIdx+len(constants.DescMarker):]
 
-	eqIdx := strings.Index(nameCmd, constants.AliasSeparator)
+	eqIdx := strings.Index(nameCmd, "=")
 	if eqIdx == -1 {
 		return
 	}
 	name := nameCmd[:eqIdx]
-	command := strings.TrimSuffix(nameCmd[eqIdx+len(constants.AliasSeparator):], `"`)
+	rest := nameCmd[eqIdx+1:]
+
+	var q byte
+	if len(rest) > 0 && (rest[0] == '"' || rest[0] == '\'') {
+		q = rest[0]
+		rest = rest[1:]
+	}
+	command := rest
+	if q != 0 {
+		command = strings.TrimSuffix(rest, string(q))
+	}
 
 	return types.AliasEntry{Name: name, Command: command, Desc: desc, Category: category}, true
 }

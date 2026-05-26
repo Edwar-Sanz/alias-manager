@@ -34,6 +34,10 @@ func WriteAlias(filePath string, entry types.AliasEntry) error {
 	}
 	defer f.Close()
 
+	if len(content) > 0 && !strings.HasSuffix(content, "\n") {
+		fmt.Fprintln(f)
+	}
+
 	_, err = fmt.Fprintln(f, newLine)
 	return err
 }
