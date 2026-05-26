@@ -13,7 +13,7 @@ func BuildLine(entry types.AliasEntry) string {
 		q = `'`
 	}
 	return fmt.Sprintf(
-		"%s%s=%s%s%s %s%s%s%s",
+		"%s%s=%s%s%s%s%s%s%s",
 		constants.AliasPrefix,
 		entry.Name,
 		q,
